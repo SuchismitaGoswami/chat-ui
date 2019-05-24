@@ -1,0 +1,15 @@
+<div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Input" (keyup)="setUserName($event.target.value)">
+  </mat-form-field>
+
+  <div style="height: 500px;color: gray;border: 3px solid salmon" *ngIf="messages.length > 0">
+    <span *ngFor="let message of messages"> {{message}} <br/></span>
+   
+  </div>
+  <mat-form-field>
+    <textarea  [(ngModel)]="message" matInput placeholder="type message ..."></textarea>
+    
+  </mat-form-field>
+  <button (click)="sendMessage()">Send</button>
+</div>
