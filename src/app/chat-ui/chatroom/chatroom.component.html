@@ -1,15 +1,38 @@
 <div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Input" (keyup)="setUserName($event.target.value)">
-  </mat-form-field>
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{chatroomName}}</mat-card-title>
+      <mat-card-subtitle>Active 4 min ago</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field style="width:100%">
+        <input matInput placeholder="Name" (keyup)="setUserName($event.target.value)">
+        <button style="float:right;background:#337ab7;color:white" mat-raised-button
+          (click)="joinChatRoom()">Join</button>
+      </mat-form-field>
 
-  <div style="height: 500px;color: gray;border: 3px solid salmon" *ngIf="messages.length > 0">
-    <span *ngFor="let message of messages"> {{message}} <br/></span>
-   
-  </div>
-  <mat-form-field>
-    <textarea  [(ngModel)]="message" matInput placeholder="type message ..."></textarea>
-    
-  </mat-form-field>
-  <button (click)="sendMessage()">Send</button>
+      <div class="scrollbar" id="style-3">
+        <mat-chip-list *ngFor="let chats of messages" >
+          <mat-chip *ngIf="chats.username != username"  style="background:#8ebfd5" selected> 
+           <span><small>{{chats.username}}</small><br/>{{chats.message}}</span></mat-chip>
+          <mat-chip *ngIf="chats.message != 'join the chat...' && chats.username == username" style="margin-left:50%; float:right;background:snow;color:steelblue" selected>{{chats.message}}</mat-chip>
+          <br />
+        </mat-chip-list>
+        <!-- <span *ngFor="let chats of messages"> {{chats.username}} {{chats.message}}   <br /></span> -->
+        <div class="force-overflow"></div>
+      </div>
+
+      <!-- <div style="height: 200px;color: gray;overflow-y: scroll;" >
+        <span *ngFor="let message of messages"> {{message}} <br /></span>
+
+      </div> -->
+      <mat-form-field style="width:100%">
+        <input [(ngModel)]="message" matInput placeholder="type message ...">
+        <button style="float:right;background:#337ab7;color:white" mat-raised-button
+          (click)="sendMessage()">Send</button>
+      </mat-form-field>
+
+    </mat-card-content>
+  </mat-card>
 </div>
