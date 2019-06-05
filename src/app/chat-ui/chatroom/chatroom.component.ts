@@ -20,7 +20,7 @@ export class ChatroomComponent implements OnInit {
     this.username = username.toLocaleUpperCase();
   }
   sendMessage() {
-    this._chatroomService.sendMessage(this.username, this.message);
+    this._chatroomService.sendMessage(this.username,this.chatroomName, this.message);
     this.message = "";
   }
   ngOnInit() {
@@ -35,7 +35,7 @@ export class ChatroomComponent implements OnInit {
   }
 
   joinChatRoom(){
-    this._chatroomService.joinChatRoom(this.username)
+    this._chatroomService.joinChatRoom(this.username,this.chatroomName);
   }
 
 }

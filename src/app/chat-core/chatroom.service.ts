@@ -12,16 +12,17 @@ export class ChatroomService {
     this.socket = io(environment.chatServerAPIURL);
   }
 
-  joinChatRoom(username: String) {
-    this.socket.emit('join', `${username}`)
+  joinChatRoom(username: String, chatRoomName: String) {
+    this.socket.emit('join', `${username}`,`${chatRoomName}`);
   }
-  sendMessage(username: String, message: String) {
+  sendMessage(username: String, chatRoomName: String, message: String) {
     console.log(`${username}:${message}`)
-    this.socket.emit('newMessage', {'username': `${username}`,'message': `${message}`});
+    this.socket.emit('newMessage', { 'username': `${username}`, 'message': `${message}`, 'chatRoomName': `${chatRoomName} `});
   }
   onNewMessage() {
     return Observable.create(observer => {
-      this.socket.on('newMessage', (message:Chat) => {
+      this.socket.on('newMessage', (message: Chat) => {
+        console.log('Found New Message')
         console.log(message);
         observer.next(message);
       })
@@ -39,23 +40,23 @@ export class ChatroomService {
       { name: "Donald L. Jordan", phone: "772-766-2842", image: "assets/imgs/chatroom.png", email: "DonaldLJordan@dayrep.com", category: "Favorites" },
       { name: "Nicole A. Rios", phone: "213-812-8400", image: "assets/imgs/chatroom.png", email: "NicoleARios@armyspy.com", category: "Missed" },
       { name: "Barbara M. Roberts", phone: "614-365-7945", image: "assets/imgs/chatroom.png", email: "BarbaraMRoberts@armyspy.com", category: "Outgoing call" }
-  ];
+    ];
     return contacts;
   }
   getCategories(): Category[] {
     let categories: Category[] = [
       {
-          text: "Chatrooms",
-          icon: "user"
+        text: "Chatrooms",
+        icon: "user"
       }, {
-          text: "Missed",
-          icon: "clock",
-          badge: 3
+        text: "Missed",
+        icon: "clock",
+        badge: 3
       }, {
-          text: "Favorites",
-          icon: "favorites"
+        text: "Favorites",
+        icon: "favorites"
       }
-  ];
+    ];
     return categories;
   }
 }
