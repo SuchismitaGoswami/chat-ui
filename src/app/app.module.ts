@@ -13,11 +13,14 @@ import {MatCardModule} from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatChipsModule} from '@angular/material/chips';
+import { HeroJobAdComponent }   from './hero-job-ad.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ChatroomComponent,
-    NavbarComponent
+    NavbarComponent,
+    HeroJobAdComponent
   ],
   imports: [
     BrowserModule,
